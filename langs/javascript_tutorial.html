@@ -1,0 +1,1554 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دورة JavaScript</title>
+  <link href="../style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .nav-buttons {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .tutorial-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .page-title {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+    }
+    /* أنماط مكون جرب بنفسك */
+    .try-it-yourself {
+      margin: 30px 0;
+      border: 2px solid var(--primary-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    .try-it-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .try-it-header h4 {
+      margin: 0;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
+    .try-it-header h4:before {
+      content: "🚀";
+      margin-left: 8px;
+      font-size: 1.4rem;
+    }
+    .try-it-container {
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 992px) {
+      .try-it-container {
+        flex-direction: row;
+        height: 450px;
+      }
+    }
+    .try-it-code {
+      flex: 1;
+      padding: 15px;
+      background-color: #282c34;
+      border-left: 1px solid #4a4f5a;
+      position: relative;
+    }
+    .try-it-result {
+      flex: 1;
+      padding: 15px;
+      border-top: 1px solid #dee2e6;
+      overflow: auto;
+      background-color: white;
+      position: relative;
+    }
+    .try-it-result:before {
+      content: "النتيجة";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 10px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 0.8rem;
+      border-bottom-left-radius: 6px;
+    }
+    .try-it-code:before {
+      content: "المحرر";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 10px;
+      background-color: #383e4a;
+      color: #eee;
+      font-size: 0.8rem;
+      border-bottom-left-radius: 6px;
+    }
+    @media (min-width: 992px) {
+      .try-it-result {
+        border-top: none;
+      }
+    }
+    [id^="js-code-editor"] {
+      width: 100%;
+      height: 300px;
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      line-height: 1.6;
+      border: 1px solid #4a4f5a;
+      background-color: #282c34;
+      color: #f8f8f2;
+      padding: 10px;
+      resize: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    .try-it-btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .try-it-btn:before {
+      content: "⚡";
+      margin-left: 8px;
+      font-size: 1.1rem;
+    }
+    .try-it-btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .try-it-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* أسلوب جدول المحتويات */
+    .table-of-contents {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border-right: 4px solid var(--primary-color);
+    }
+    .table-of-contents h3 {
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    .table-of-contents ul {
+      list-style-type: none;
+      padding-right: 20px;
+    }
+    .table-of-contents ul li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-right: 20px;
+    }
+    .table-of-contents ul li::before {
+      content: "◉";
+      position: absolute;
+      right: 0;
+      color: var(--primary-color);
+    }
+    .table-of-contents a {
+      text-decoration: none;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    .table-of-contents a:hover {
+      color: var(--primary-color);
+      padding-right: 5px;
+    }
+    
+    /* تخصيص عناصر خاصة بـ JavaScript */
+    .js-example {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 25px 0;
+      border-right: 4px solid #f1c40f;
+    }
+    
+    .js-note {
+      background-color: #fef9e7;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      position: relative;
+      padding-right: 40px;
+    }
+    
+    .js-note::before {
+      content: "💡";
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 1.2rem;
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+    }
+    
+    .comparison-table th, .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: right;
+    }
+    
+    .comparison-table th {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .comparison-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    .comparison-table tr:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .console-output {
+      background-color: #2d2d2d;
+      color: #4caf50;
+      font-family: 'Courier New', monospace;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">منصة البرمجة</div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">الرئيسية</a></li>
+          <li><a href="../index.html#courses">الدورات</a></li>
+          <li><a href="../index.html#web-security">أمان الويب</a></li>
+          <li><a href="../index.html#about">عن المطور</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="nav-buttons">
+      <a href="../index.html#courses" class="btn">العودة للدورات</a>
+    </div>
+
+    <h1 class="page-title">دورة JavaScript - لغة البرمجة التفاعلية</h1>
+
+    <div class="table-of-contents">
+      <h3>جدول المحتويات</h3>
+      <ul>
+        <li><a href="#intro-js">الدرس 1: مقدمة إلى JavaScript</a></li>
+        <li><a href="#variables">الدرس 2: المتغيرات وأنواع البيانات</a></li>
+        <li><a href="#operators">الدرس 3: العمليات والمعاملات</a></li>
+        <li><a href="#conditions">الدرس 4: الشروط والتحكم في المسار</a></li>
+        <li><a href="#loops">الدرس 5: الحلقات التكرارية</a></li>
+        <li><a href="#functions">الدرس 6: الدوال (Functions)</a></li>
+        <li><a href="#arrays">الدرس 7: المصفوفات (Arrays)</a></li>
+        <li><a href="#objects">الدرس 8: الكائنات (Objects)</a></li>
+        <li><a href="#dom">الدرس 9: التعامل مع DOM</a></li>
+        <li><a href="#events">الدرس 10: الأحداث (Events)</a></li>
+        <li><a href="#project">مشروع تطبيقي</a></li>
+      </ul>
+    </div>
+
+    <div class="tutorial-content">
+      <div id="intro-js" class="lesson">
+        <h3>الدرس 1: مقدمة إلى JavaScript</h3>
+        <p>JavaScript هي لغة برمجة عالية المستوى تُستخدم لإضافة التفاعل والحركة إلى صفحات الويب. تم تطويرها في الأصل لتشغيلها في متصفحات الويب، ولكنها الآن تستخدم أيضًا في بيئات أخرى مثل الخوادم (Node.js) وتطبيقات سطح المكتب.</p>
+        
+        <div class="html-explanation">
+          <h4>لماذا نتعلم JavaScript؟</h4>
+          <ul>
+            <li><strong>لغة برمجة أساسية للويب</strong>: لا غنى عنها لأي مطور ويب حديث</li>
+            <li><strong>سهلة التعلم للمبتدئين</strong>: بناء جملة بسيط وواضح</li>
+            <li><strong>متعددة الاستخدامات</strong>: تستخدم في الواجهة الأمامية والخلفية والتطبيقات المتنوعة</li>
+            <li><strong>مجتمع ضخم من المطورين</strong>: العديد من المكتبات والأطر المتاحة</li>
+            <li><strong>مطلوبة في سوق العمل</strong>: من أكثر المهارات طلبًا في مجال تطوير البرمجيات</li>
+          </ul>
+        </div>
+        
+        <div class="code-example">
+          <h4>طرق إضافة JavaScript إلى صفحات HTML:</h4>
+          <pre><code>/* 1. JavaScript داخلي مباشرة في الوسوم (غير محبذ) */
+&lt;button onclick="alert('مرحباً بالعالم!')"&gt;انقر هنا&lt;/button&gt;
+
+/* 2. JavaScript مضمن باستخدام وسم script */
+&lt;script&gt;
+  // كود JavaScript هنا
+  function sayHello() {
+    alert('مرحباً بالعالم!');
+  }
+&lt;/script&gt;
+
+/* 3. JavaScript خارجي - الطريقة المفضلة */
+&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="js-example">
+          <h4>أول برنامج JavaScript:</h4>
+          <p>يمكنك أن تبدأ بأبسط أمر وهو طباعة "مرحباً بالعالم!" على وحدة التحكم (console):</p>
+          <pre><code>// طباعة في وحدة التحكم (ستظهر في أدوات المطور F12)
+console.log("مرحباً بالعالم!");
+
+// عرض نافذة منبثقة للمستخدم
+alert("مرحباً بالعالم!");</code></pre>
+          
+          <div class="console-output">
+> مرحباً بالعالم!
+          </div>
+        </div>
+
+        <div class="try-it-yourself">
+          <div class="try-it-header">
+            <h4>جرب بنفسك!</h4>
+          </div>
+          <div class="try-it-container">
+            <div class="try-it-code">
+              <textarea id="js-code-editor-1">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;تجربة JavaScript&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .message {
+      font-size: 24px;
+      margin: 20px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;مرحباً بعالم JavaScript&lt;/h1&gt;
+  &lt;div class="message" id="output"&gt;انقر على الزر لعرض رسالة&lt;/div&gt;
+  
+  &lt;button onclick="showMessage()"&gt;انقر هنا&lt;/button&gt;
+  
+  &lt;script&gt;
+    // دالة تقوم بتغيير محتوى عنصر HTML
+    function showMessage() {
+      // احصل على العنصر بواسطة معرفه
+      const outputElement = document.getElementById('output');
+      
+      // غير محتواه النصي
+      outputElement.textContent = 'مرحباً بك في عالم البرمجة التفاعلية!';
+      
+      // غير لون النص
+      outputElement.style.color = '#2196F3';
+      
+      // أضف حدود للعنصر
+      outputElement.style.border = '2px solid #2196F3';
+      outputElement.style.padding = '10px';
+      outputElement.style.borderRadius = '5px';
+      
+      // أضف مؤثر حركي بسيط
+      setTimeout(function() {
+        outputElement.style.fontSize = '28px';
+      }, 500);
+    }
+    
+    // يمكنك أيضًا إضافة أكواد أخرى هنا
+    console.log('تم تحميل الصفحة بنجاح');
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+              <button class="try-it-btn" onclick="runCode(1)">تشغيل الكود</button>
+            </div>
+            <div class="try-it-result" id="result-1">
+              <iframe id="result-frame-1" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="js-note">
+          <p>لتشغيل أكواد JavaScript وتجربتها بسهولة، يمكنك استخدام وحدة التحكم (Console) في متصفحك. افتح أدوات المطور بالضغط على F12، ثم انتقل إلى تبويب "Console" واكتب أكواد JavaScript مباشرة.</p>
+        </div>
+
+        <div class="course-navigation">
+          <a href="#intro-js">الدرس السابق</a>
+          <a href="#variables">الدرس التالي</a>
+        </div>
+      </div>
+
+      <div id="variables" class="lesson">
+        <h3>الدرس 2: المتغيرات وأنواع البيانات</h3>
+        <p>المتغيرات هي حاويات لتخزين البيانات في الذاكرة. في JavaScript، يمكننا تعريف المتغيرات باستخدام كلمات محجوزة: <code>var</code>، <code>let</code>، أو <code>const</code>.</p>
+
+        <div class="html-explanation">
+          <h4>طرق تعريف المتغيرات:</h4>
+          <ul>
+            <li><strong>var</strong>: الطريقة القديمة، لها نطاق الدالة (function scope)</li>
+            <li><strong>let</strong>: طريقة حديثة، لها نطاق الكتلة (block scope)، يمكن تغيير قيمتها</li>
+            <li><strong>const</strong>: للثوابت، لها نطاق الكتلة ولا يمكن إعادة تعيين قيمتها</li>
+          </ul>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على تعريف المتغيرات:</h4>
+          <pre><code>// استخدام var (قديم، غير محبذ حاليًا)
+var name = "أحمد";
+
+// استخدام let (مفضل للمتغيرات التي تتغير قيمتها)
+let age = 25;
+age = 26; // يمكن تغيير القيمة
+
+// استخدام const (للقيم الثابتة)
+const PI = 3.14159;
+// PI = 3.14; // خطأ! لا يمكن تغيير قيمة const
+
+// يمكنك تعريف متغير بدون قيمة
+let country;
+country = "مصر"; // ثم تعيين قيمة لاحقًا</code></pre>
+        </div>
+
+        <div class="html-explanation">
+          <h4>أنواع البيانات في JavaScript:</h4>
+          <ul>
+            <li><strong>النصوص (String)</strong>: سلسلة من الأحرف <code>"مرحبا"</code> أو <code>'مرحبا'</code></li>
+            <li><strong>الأرقام (Number)</strong>: <code>42</code> أو <code>3.14</code></li>
+            <li><strong>القيم المنطقية (Boolean)</strong>: <code>true</code> أو <code>false</code></li>
+            <li><strong>المصفوفات (Array)</strong>: <code>[1, 2, 3]</code></li>
+            <li><strong>الكائنات (Object)</strong>: <code>{name: "محمد", age: 30}</code></li>
+            <li><strong>القيمة الفارغة (null)</strong>: <code>null</code></li>
+            <li><strong>القيمة غير المعرفة (undefined)</strong>: <code>undefined</code></li>
+            <li><strong>الرموز (Symbol)</strong> (مستخدمة بشكل متقدم)</li>
+            <li><strong>الأرقام الكبيرة (BigInt)</strong>: <code>9007199254740991n</code></li>
+          </ul>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على أنواع البيانات:</h4>
+          <pre><code>// النصوص (String)
+let firstName = "علي";
+let lastName = 'محمد';
+let fullName = `${firstName} ${lastName}`; // الدمج باستخدام القوالب النصية
+
+// الأرقام (Number)
+let integer = 42;         // رقم صحيح
+let float = 3.14;         // رقم عشري
+let negative = -10;       // رقم سالب
+
+// القيم المنطقية (Boolean)
+let isActive = true;
+let isCompleted = false;
+
+// المصفوفات (Array)
+let colors = ["أحمر", "أخضر", "أزرق"];
+let numbers = [1, 2, 3, 4, 5];
+let mixed = [1, "اثنان", true, null]; // يمكن أن تحتوي على أنواع مختلفة
+
+// الكائنات (Object)
+let person = {
+  name: "سارة",
+  age: 28,
+  city: "القاهرة",
+  isStudent: true
+};
+
+// القيمة الفارغة والقيمة غير المعرفة
+let empty = null;
+let notDefined;  // قيمتها undefined تلقائيًا</code></pre>
+        </div>
+
+        <div class="js-note">
+          <p>في JavaScript، يمكن معرفة نوع المتغير باستخدام العامل <code>typeof</code>:</p>
+          <pre><code>console.log(typeof "مرحبا");  // "string"
+console.log(typeof 42);       // "number"
+console.log(typeof true);     // "boolean"
+console.log(typeof [1,2,3]);  // "object" (هذا غريب لكنه صحيح!)
+console.log(typeof null);     // "object" (هذا خطأ تاريخي في اللغة)
+console.log(typeof undefined);// "undefined"</code></pre>
+        </div>
+
+        <div class="try-it-yourself">
+          <div class="try-it-header">
+            <h4>جرب بنفسك!</h4>
+          </div>
+          <div class="try-it-container">
+            <div class="try-it-code">
+              <textarea id="js-code-editor-2">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;المتغيرات وأنواع البيانات&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .result {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-top: 20px;
+      font-family: monospace;
+      white-space: pre-line;
+    }
+    .controls {
+      margin: 20px 0;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input, select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;h1&gt;استكشاف المتغيرات وأنواع البيانات&lt;/h1&gt;
+    
+    &lt;div class="controls"&gt;
+      &lt;label for="dataType"&gt;اختر نوع البيانات:&lt;/label&gt;
+      &lt;select id="dataType"&gt;
+        &lt;option value="string"&gt;نص (String)&lt;/option&gt;
+        &lt;option value="number"&gt;رقم (Number)&lt;/option&gt;
+        &lt;option value="boolean"&gt;منطقي (Boolean)&lt;/option&gt;
+        &lt;option value="array"&gt;مصفوفة (Array)&lt;/option&gt;
+        &lt;option value="object"&gt;كائن (Object)&lt;/option&gt;
+      &lt;/select&gt;
+      
+      &lt;input type="text" id="inputValue" placeholder="أدخل قيمة للتجربة"&gt;
+      &lt;button onclick="addVariable()"&gt;إضافة متغير&lt;/button&gt;
+      &lt;button onclick="clearAll()"&gt;مسح الكل&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="result" id="output"&gt;// ستظهر هنا نتائج التجارب&lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;script&gt;
+    // قائمة لتخزين المتغيرات
+    let variables = [];
+    const output = document.getElementById('output');
+    
+    // دالة لإضافة متغير جديد
+    function addVariable() {
+      const type = document.getElementById('dataType').value;
+      const input = document.getElementById('inputValue').value;
+      
+      let value;
+      let code = '';
+      
+      try {
+        // تحويل القيمة المدخلة إلى النوع المحدد
+        switch(type) {
+          case 'string':
+            value = String(input);
+            code = `let myString${variables.length + 1} = "${value}";`;
+            break;
+          case 'number':
+            value = Number(input);
+            if (isNaN(value)) throw new Error("ليس رقمًا صالحًا");
+            code = `let myNumber${variables.length + 1} = ${value};`;
+            break;
+          case 'boolean':
+            value = input.toLowerCase() === 'true';
+            code = `let myBoolean${variables.length + 1} = ${value};`;
+            break;
+          case 'array':
+            try {
+              // محاولة تحويل المدخل إلى مصفوفة
+              value = JSON.parse(input.replace(/'/g, '"'));
+              if (!Array.isArray(value)) {
+                // إذا لم يكن المدخل بتنسيق JSON، نقسمه بالفواصل
+                value = input.split(',').map(item => item.trim());
+              }
+            } catch {
+              value = input.split(',').map(item => item.trim());
+            }
+            code = `let myArray${variables.length + 1} = ${JSON.stringify(value)};`;
+            break;
+          case 'object':
+            try {
+              // محاولة تحويل المدخل إلى كائن
+              value = JSON.parse(input.replace(/'/g, '"'));
+            } catch {
+              // إذا فشل، ننشئ كائن بسيط
+              value = { value: input };
+            }
+            code = `let myObject${variables.length + 1} = ${JSON.stringify(value)};`;
+            break;
+        }
+        
+        // إضافة المتغير إلى القائمة
+        variables.push({
+          name: `variable${variables.length + 1}`,
+          type,
+          value,
+          code
+        });
+        
+        // عرض النتائج
+        displayResults();
+        
+      } catch (error) {
+        output.textContent += `\n// خطأ: ${error.message}`;
+      }
+    }
+    
+    // دالة لعرض النتائج
+    function displayResults() {
+      output.textContent = '// المتغيرات المعرفة:\n';
+      
+      variables.forEach(variable => {
+        output.textContent += `${variable.code}\n`;
+      });
+      
+      if (variables.length > 0) {
+        output.textContent += '\n// فحص أنواع المتغيرات:\n';
+        
+        variables.forEach(variable => {
+          const varName = variable.code.split(' ')[1].split('=')[0].trim();
+          output.textContent += `console.log(typeof ${varName}); // "${typeof variable.value}"\n`;
+        });
+        
+        // عمليات إضافية للتوضيح
+        if (variables.length >= 2) {
+          output.textContent += '\n// أمثلة على العمليات:\n';
+          
+          const var1 = variables[variables.length - 2];
+          const var2 = variables[variables.length - 1];
+          const name1 = var1.code.split(' ')[1].split('=')[0].trim();
+          const name2 = var2.code.split(' ')[1].split('=')[0].trim();
+          
+          output.textContent += `// محاولة دمج متغيرين:\n`;
+          output.textContent += `console.log(${name1} + ${name2}); // النتيجة: ${var1.value + var2.value}\n`;
+        }
+      }
+    }
+    
+    // دالة لمسح كل المتغيرات
+    function clearAll() {
+      variables = [];
+      output.textContent = '// تم مسح كل المتغيرات';
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+              <button class="try-it-btn" onclick="runCode(2)">تشغيل الكود</button>
+            </div>
+            <div class="try-it-result" id="result-2">
+              <iframe id="result-frame-2" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-navigation">
+          <a href="#intro-js">الدرس السابق</a>
+          <a href="#operators">الدرس التالي</a>
+        </div>
+      </div>
+
+      <div id="operators" class="lesson">
+        <h3>الدرس 3: العمليات والمعاملات</h3>
+        <p>المعاملات (Operators) هي رموز خاصة تستخدم لإجراء عمليات على المتغيرات والقيم. تتيح لنا إجراء العمليات الحسابية والمنطقية والمقارنات وغيرها.</p>
+
+        <div class="html-explanation">
+          <h4>أنواع المعاملات الرئيسية في JavaScript:</h4>
+          <ul>
+            <li><strong>المعاملات الحسابية</strong>: لإجراء العمليات الرياضية</li>
+            <li><strong>معاملات التعيين</strong>: لتعيين القيم للمتغيرات</li>
+            <li><strong>معاملات المقارنة</strong>: للمقارنة بين القيم</li>
+            <li><strong>المعاملات المنطقية</strong>: للعمليات المنطقية</li>
+            <li><strong>معاملات السلاسل النصية</strong>: لدمج النصوص</li>
+            <li><strong>المعاملات الثلاثية</strong>: لإجراء عملية شرطية في سطر واحد</li>
+            <li><strong>معاملات البت</strong>: للتعامل مع البيانات على مستوى البت</li>
+            <li><strong>معاملات خاصة</strong>: مثل typeof وinstanceof</li>
+          </ul>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على المعاملات الحسابية:</h4>
+          <pre><code>// المعاملات الحسابية
+let a = 10;
+let b = 3;
+
+let sum = a + b;      // الجمع: 13
+let difference = a - b; // الطرح: 7
+let product = a * b;  // الضرب: 30
+let quotient = a / b; // القسمة: 3.3333...
+let remainder = a % b; // باقي القسمة: 1
+let exponent = a ** b; // الأس: 10^3 = 1000
+
+// زيادة ونقصان
+let x = 5;
+x++; // زيادة بمقدار 1 (الآن x = 6)
+x--; // نقصان بمقدار 1 (الآن x = 5)
+
+// الزيادة أو النقصان قبل أو بعد
+let y = 5;
+let z = y++; // z = 5, y = 6 (استخدام القيمة ثم الزيادة)
+let w = ++y; // w = 7, y = 7 (الزيادة ثم استخدام القيمة)</code></pre>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على معاملات التعيين:</h4>
+          <pre><code>// معاملات التعيين
+let x = 10;  // تعيين قيمة 10 للمتغير x
+
+// معاملات التعيين المختصرة
+x += 5;  // نفس x = x + 5 (الآن x = 15)
+x -= 3;  // نفس x = x - 3 (الآن x = 12)
+x *= 2;  // نفس x = x * 2 (الآن x = 24)
+x /= 4;  // نفس x = x / 4 (الآن x = 6)
+x %= 4;  // نفس x = x % 4 (الآن x = 2)
+x **= 3; // نفس x = x ** 3 (الآن x = 8)</code></pre>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على معاملات المقارنة:</h4>
+          <pre><code>// معاملات المقارنة
+let a = 5;
+let b = 10;
+let c = "5";
+
+console.log(a == b);   // يساوي: false
+console.log(a == c);   // يساوي (مع تحويل النوع): true
+console.log(a === c);  // يساوي تمامًا (بدون تحويل النوع): false
+console.log(a != b);   // لا يساوي: true
+console.log(a !== c);  // لا يساوي تمامًا: true
+console.log(a < b);    // أصغر من: true
+console.log(a > b);    // أكبر من: false
+console.log(a <= b);   // أصغر من أو يساوي: true
+console.log(a >= b);   // أكبر من أو يساوي: false</code></pre>
+        </div>
+
+        <div class="js-example">
+          <h4>أمثلة على المعاملات المنطقية:</h4>
+          <pre><code>// المعاملات المنطقية
+let x = true;
+let y = false;
+
+console.log(x && y); // AND (و): false (كلاهما يجب أن يكون true)
+console.log(x || y); // OR (أو): true (أحدهما على الأقل يجب أن يكون true)
+console.log(!x);     // NOT (ليس): false (عكس القيمة المنطقية)
+
+// أمثلة عملية
+let age = 25;
+let hasPermission = true;
+
+// التحقق من شرطين معًا
+let canAccess = age >= 18 && hasPermission; // true
+
+// التحقق من أحد الشرطين
+let isEligible = age < 15 || age > 65; // false</code></pre>
+        </div>
+
+        <div class="js-note">
+          <p>انتبه عند استخدام معاملات المقارنة في JavaScript! الفرق بين <code>==</code> و <code>===</code> مهم جدًا:</p>
+          <ul>
+            <li><code>==</code> تقارن القيم مع تحويل النوع تلقائيًا</li>
+            <li><code>===</code> تقارن القيم والنوع (مقارنة صارمة)</li>
+          </ul>
+          <p>من الأفضل دائمًا استخدام <code>===</code> (و <code>!==</code>) لتجنب أخطاء التحويل التلقائي للنوع.</p>
+        </div>
+
+        <div class="try-it-yourself">
+          <div class="try-it-header">
+            <h4>جرب بنفسك!</h4>
+          </div>
+          <div class="try-it-container">
+            <div class="try-it-code">
+              <textarea id="js-code-editor-3">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;حاسبة JavaScript&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .calculator {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 350px;
+      padding: 20px;
+    }
+    .calculator-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .calculator-body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .input-field {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+    .operator-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .operator-btn {
+      padding: 12px;
+      background-color: #e9e9e9;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .operator-btn:hover {
+      background-color: #d4d4d4;
+    }
+    .operator-btn.active {
+      background-color: #4caf50;
+      color: white;
+    }
+    .calculate-btn {
+      padding: 12px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calculate-btn:hover {
+      background-color: #3e8e41;
+    }
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 20px;
+      border: 1px solid #ddd;
+      min-height: 30px;
+    }
+    .operation-steps {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="calculator"&gt;
+    &lt;div class="calculator-header"&gt;
+      &lt;h2&gt;حاسبة JavaScript&lt;/h2&gt;
+      &lt;p&gt;استكشف المعاملات المختلفة&lt;/p&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="calculator-body"&gt;
+      &lt;div class="input-group"&gt;
+        &lt;input type="number" id="num1" class="input-field" placeholder="الرقم الأول" value="10"&gt;
+        &lt;input type="number" id="num2" class="input-field" placeholder="الرقم الثاني" value="5"&gt;
+      &lt;/div&gt;
+      
+      &lt;div class="operator-group"&gt;
+        &lt;button class="operator-btn active" data-operator="+"&gt;+&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="-"&gt;-&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="*"&gt;×&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="/"&gt;÷&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="%"&gt;%&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="**"&gt;^&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator="=="&gt;==&lt;/button&gt;
+        &lt;button class="operator-btn" data-operator==="&gt;===&lt;/button&gt;
+      &lt;/div&gt;
+      
+      &lt;button class="calculate-btn" id="calculate"&gt;حساب&lt;/button&gt;
+      
+      &lt;div class="result" id="result"&gt;النتيجة ستظهر هنا&lt;/div&gt;
+      
+      &lt;div class="operation-steps" id="steps"&gt;
+        // خطوات العملية ستظهر هنا
+        // جرب النقر على أزرار المعاملات المختلفة لرؤية كيفية عملها
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // الحصول على عناصر DOM
+    const num1Input = document.getElementById('num1');
+    const num2Input = document.getElementById('num2');
+    const operatorButtons = document.querySelectorAll('.operator-btn');
+    const calculateButton = document.getElementById('calculate');
+    const resultDiv = document.getElementById('result');
+    const stepsDiv = document.getElementById('steps');
+    
+    // تحديد المعامل الافتراضي
+    let currentOperator = '+';
+    
+    // إضافة مستمعي أحداث للأزرار
+    operatorButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // إزالة الصنف "active" من جميع الأزرار
+        operatorButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // إضافة الصنف "active" للزر المحدد
+        this.classList.add('active');
+        
+        // تحديث المعامل الحالي
+        currentOperator = this.getAttribute('data-operator');
+      });
+    });
+    
+    // إضافة مستمع حدث لزر الحساب
+    calculateButton.addEventListener('click', calculate);
+    
+    // دالة الحساب
+    function calculate() {
+      // الحصول على القيم من حقول الإدخال
+      let num1 = parseFloat(num1Input.value);
+      let num2 = parseFloat(num2Input.value);
+      
+      // التحقق من صحة القيم
+      if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = 'الرجاء إدخال أرقام صالحة';
+        return;
+      }
+      
+      // إنشاء نص لخطوات العملية
+      let steps = `// خطوات العملية باستخدام المعامل "${currentOperator}":\n`;
+      steps += `let num1 = ${num1};\n`;
+      steps += `let num2 = ${num2};\n`;
+      
+      let result;
+      
+      // تنفيذ العملية المناسبة حسب المعامل
+      switch(currentOperator) {
+        case '+':
+          result = num1 + num2;
+          steps += `\n// عملية الجمع\n`;
+          steps += `let result = num1 + num2;\n`;
+          steps += `// result = ${num1} + ${num2} = ${result}`;
+          break;
+        case '-':
+          result = num1 - num2;
+          steps += `\n// عملية الطرح\n`;
+          steps += `let result = num1 - num2;\n`;
+          steps += `// result = ${num1} - ${num2} = ${result}`;
+          break;
+        case '*':
+          result = num1 * num2;
+          steps += `\n// عملية الضرب\n`;
+          steps += `let result = num1 * num2;\n`;
+          steps += `// result = ${num1} * ${num2} = ${result}`;
+          break;
+        case '/':
+          if (num2 === 0) {
+            result = 'لا يمكن القسمة على صفر';
+            steps += `\n// خطأ: لا يمكن القسمة على صفر`;
+          } else {
+            result = num1 / num2;
+            steps += `\n// عملية القسمة\n`;
+            steps += `let result = num1 / num2;\n`;
+            steps += `// result = ${num1} / ${num2} = ${result}`;
+          }
+          break;
+        case '%':
+          result = num1 % num2;
+          steps += `\n// عملية باقي القسمة\n`;
+          steps += `let result = num1 % num2;\n`;
+          steps += `// result = ${num1} % ${num2} = ${result}`;
+          steps += `\n// باقي القسمة: ما يتبقى بعد قسمة الرقم الأول على الرقم الثاني`;
+          break;
+        case '**':
+          result = num1 ** num2;
+          steps += `\n// عملية الأس\n`;
+          steps += `let result = num1 ** num2;\n`;
+          steps += `// result = ${num1} ** ${num2} = ${result}`;
+          steps += `\n// الأس: الرقم الأول مرفوع للقوة الثانية`;
+          break;
+        case '==':
+          result = num1 == num2;
+          steps += `\n// مقارنة القيم (==)\n`;
+          steps += `let result = num1 == num2;\n`;
+          steps += `// result = (${num1} == ${num2}) = ${result}`;
+          steps += `\n// المعامل == يقارن القيم بعد التحويل التلقائي للنوع`;
+          
+          // إضافة مثال توضيحي
+          steps += `\n\n// مثال توضيحي للتحويل التلقائي:\n`;
+          steps += `console.log(5 == "5"); // ${5 == "5"} - لاحظ أن الرقم والنص متساويان`;
+          break;
+        case '===':
+          result = num1 === num2;
+          steps += `\n// مقارنة القيم والنوع (===)\n`;
+          steps += `let result = num1 === num2;\n`;
+          steps += `// result = (${num1} === ${num2}) = ${result}`;
+          steps += `\n// المعامل === يقارن القيم والنوع دون تحويل`;
+          
+          // إضافة مثال توضيحي
+          steps += `\n\n// مثال توضيحي للمقارنة الصارمة:\n`;
+          steps += `console.log(5 === "5"); // ${5 === "5"} - لاحظ أن الرقم والنص غير متساويين بالمقارنة الصارمة`;
+          break;
+      }
+      
+      // عرض النتيجة
+      resultDiv.textContent = result.toString();
+      
+      // عرض خطوات العملية
+      stepsDiv.textContent = steps;
+    }
+    
+    // تنفيذ حساب مبدئي عند تحميل الصفحة
+    calculate();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+              <button class="try-it-btn" onclick="runCode(3)">تشغيل الكود</button>
+            </div>
+            <div class="try-it-result" id="result-3">
+              <iframe id="result-frame-3" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-navigation">
+          <a href="#variables">الدرس السابق</a>
+          <a href="#conditions">الدرس التالي</a>
+        </div>
+      </div>
+
+      <div id="project" class="project">
+        <h3>مشروع تطبيقي: تطوير تطبيق قائمة المهام (Todo List)</h3>
+        <p>في هذا المشروع، سنقوم بتطوير تطبيق بسيط لإدارة المهام يجمع بين كل ما تعلمناه في الدورة. سيتيح التطبيق إضافة مهام جديدة وتمييزها كمكتملة وحذفها، مع حفظها في التخزين المحلي للمتصفح.</p>
+        
+        <div class="try-it-yourself">
+          <div class="try-it-header">
+            <h4>المشروع التطبيقي - تطبيق قائمة المهام</h4>
+          </div>
+          <div class="try-it-container">
+            <div class="try-it-code">
+              <textarea id="js-code-editor-4">&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;تطبيق قائمة المهام&lt;/title&gt;
+  &lt;style&gt;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    
+    .app-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+    
+    .todo-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .todo-header {
+      background-color: #3498db;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .todo-form {
+      display: flex;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .todo-input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px 0 0 4px;
+      font-size: 16px;
+    }
+    
+    .todo-submit {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    .todo-submit:hover {
+      background-color: #27ae60;
+    }
+    
+    .todo-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .todo-item {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+    
+    .todo-item:last-child {
+      border-bottom: none;
+    }
+    
+    .todo-item:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .todo-text {
+      flex: 1;
+      margin-right: 10px;
+    }
+    
+    .completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+    
+    .todo-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .todo-complete {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .todo-complete:hover {
+      background-color: #2980b9;
+    }
+    
+    .todo-delete {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .todo-delete:hover {
+      background-color: #c0392b;
+    }
+    
+    .todo-stats {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background-color: #f9f9f9;
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+    
+    .empty-list {
+      text-align: center;
+      padding: 20px;
+      color: #7f8c8d;
+    }
+    
+    .filters {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+      background-color: #f5f5f5;
+      gap: 10px;
+    }
+    
+    .filter-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .filter-btn.active {
+      background-color: #3498db;
+      color: white;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;h1 class="app-title"&gt;تطبيق قائمة المهام&lt;/h1&gt;
+    
+    &lt;div class="todo-container"&gt;
+      &lt;div class="todo-header"&gt;
+        &lt;h2&gt;قائمة المهام&lt;/h2&gt;
+      &lt;/div&gt;
+      
+      &lt;form class="todo-form" id="todo-form"&gt;
+        &lt;input type="text" class="todo-input" id="todo-input" placeholder="أضف مهمة جديدة..." required&gt;
+        &lt;button type="submit" class="todo-submit"&gt;إضافة&lt;/button&gt;
+      &lt;/form&gt;
+      
+      &lt;div class="filters"&gt;
+        &lt;button class="filter-btn active" data-filter="all"&gt;الكل&lt;/button&gt;
+        &lt;button class="filter-btn" data-filter="active"&gt;النشطة&lt;/button&gt;
+        &lt;button class="filter-btn" data-filter="completed"&gt;المكتملة&lt;/button&gt;
+      &lt;/div&gt;
+      
+      &lt;ul class="todo-list" id="todo-list"&gt;
+        &lt;!-- ستضاف المهام هنا ديناميكيًا باستخدام JavaScript --&gt;
+      &lt;/ul&gt;
+      
+      &lt;div class="todo-stats" id="todo-stats"&gt;
+        &lt;span class="todos-count"&gt;المهام المتبقية: 0&lt;/span&gt;
+        &lt;button class="clear-completed" id="clear-completed"&gt;حذف المكتملة&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // دالة فورية لإنشاء نطاق منفصل
+    (function() {
+      // تعريف المتغيرات
+      const todoForm = document.getElementById('todo-form');
+      const todoInput = document.getElementById('todo-input');
+      const todoList = document.getElementById('todo-list');
+      const todoStats = document.getElementById('todo-stats');
+      const clearCompletedBtn = document.getElementById('clear-completed');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      // مصفوفة لتخزين المهام
+      let todos = [];
+      
+      // الفلتر الحالي
+      let currentFilter = 'all';
+      
+      // تحميل البيانات من التخزين المحلي
+      function loadTodos() {
+        const savedTodos = localStorage.getItem('todos');
+        if (savedTodos) {
+          todos = JSON.parse(savedTodos);
+          renderTodos();
+        }
+      }
+      
+      // حفظ البيانات في التخزين المحلي
+      function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+      }
+      
+      // إضافة مهمة جديدة
+      function addTodo(text) {
+        const newTodo = {
+          id: Date.now(),
+          text: text,
+          completed: false,
+          createdAt: new Date()
+        };
+        
+        todos.push(newTodo);
+        saveTodos();
+        renderTodos();
+      }
+      
+      // إزالة مهمة
+      function removeTodo(id) {
+        todos = todos.filter(todo => todo.id !== id);
+        saveTodos();
+        renderTodos();
+      }
+      
+      // تبديل حالة المهمة (مكتمل/غير مكتمل)
+      function toggleTodoStatus(id) {
+        todos = todos.map(todo => {
+          if (todo.id === id) {
+            return { ...todo, completed: !todo.completed };
+          }
+          return todo;
+        });
+        
+        saveTodos();
+        renderTodos();
+      }
+      
+      // حذف المهام المكتملة
+      function clearCompleted() {
+        todos = todos.filter(todo => !todo.completed);
+        saveTodos();
+        renderTodos();
+      }
+      
+      // تحديث عدد المهام المتبقية
+      function updateTodoStats() {
+        const remainingTodos = todos.filter(todo => !todo.completed).length;
+        const todosCountEl = todoStats.querySelector('.todos-count');
+        todosCountEl.textContent = `المهام المتبقية: ${remainingTodos}`;
+      }
+      
+      // تصفية المهام حسب الحالة
+      function filterTodos(filter) {
+        currentFilter = filter;
+        
+        // تحديث نشاط أزرار التصفية
+        filterBtns.forEach(btn => {
+          if (btn.getAttribute('data-filter') === filter) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+        
+        renderTodos();
+      }
+      
+      // عرض المهام في واجهة المستخدم
+      function renderTodos() {
+        // تصفية المهام حسب الفلتر الحالي
+        let filteredTodos = todos;
+        
+        if (currentFilter === 'active') {
+          filteredTodos = todos.filter(todo => !todo.completed);
+        } else if (currentFilter === 'completed') {
+          filteredTodos = todos.filter(todo => todo.completed);
+        }
+        
+        // إفراغ قائمة المهام
+        todoList.innerHTML = '';
+        
+        // إذا لم توجد مهام، عرض رسالة
+        if (filteredTodos.length === 0) {
+          const emptyListEl = document.createElement('li');
+          emptyListEl.classList.add('empty-list');
+          emptyListEl.textContent = 'لا توجد مهام لعرضها';
+          todoList.appendChild(emptyListEl);
+        }
+        
+        // إضافة المهام إلى القائمة
+        filteredTodos.forEach(todo => {
+          const todoItem = document.createElement('li');
+          todoItem.classList.add('todo-item');
+          todoItem.setAttribute('data-id', todo.id);
+          
+          const todoText = document.createElement('span');
+          todoText.classList.add('todo-text');
+          todoText.textContent = todo.text;
+          
+          if (todo.completed) {
+            todoText.classList.add('completed');
+          }
+          
+          const todoActions = document.createElement('div');
+          todoActions.classList.add('todo-actions');
+          
+          const completeBtn = document.createElement('button');
+          completeBtn.classList.add('todo-complete');
+          completeBtn.textContent = todo.completed ? 'تراجع' : 'إكمال';
+          completeBtn.addEventListener('click', () => toggleTodoStatus(todo.id));
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.classList.add('todo-delete');
+          deleteBtn.textContent = 'حذف';
+          deleteBtn.addEventListener('click', () => removeTodo(todo.id));
+          
+          todoActions.appendChild(completeBtn);
+          todoActions.appendChild(deleteBtn);
+          
+          todoItem.appendChild(todoText);
+          todoItem.appendChild(todoActions);
+          
+          todoList.appendChild(todoItem);
+        });
+        
+        // تحديث إحصائيات المهام
+        updateTodoStats();
+      }
+      
+      // مستمعي الأحداث
+      todoForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const todoText = todoInput.value.trim();
+        
+        if (todoText !== '') {
+          addTodo(todoText);
+          todoInput.value = '';
+          todoInput.focus();
+        }
+      });
+      
+      clearCompletedBtn.addEventListener('click', clearCompleted);
+      
+      // إضافة مستمعي أحداث لأزرار التصفية
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          filterTodos(filter);
+        });
+      });
+      
+      // بدء التطبيق: تحميل المهام المخزنة
+      loadTodos();
+    })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+              <button class="try-it-btn" onclick="runCode(4)">تشغيل الكود</button>
+            </div>
+            <div class="try-it-result" id="result-4">
+              <iframe id="result-frame-4" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>جميع الحقوق محفوظة &copy; 2025 - منصة تعليم البرمجة</p>
+    </div>
+  </footer>
+
+  <script>
+    function runCode(editorId) {
+      const codeEditor = document.getElementById(`js-code-editor-${editorId}`);
+      const resultFrame = document.getElementById(`result-frame-${editorId}`);
+      
+      // احصل على الكود من محرر النصوص
+      const code = codeEditor.value;
+      
+      // احصل على iframe للعرض
+      const iframe = resultFrame;
+      
+      // افتح وثيقة iframe واكتب الكود
+      iframe.srcdoc = code;
+    }
+    
+    // تشغيل الكود تلقائيًا عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      for(let i = 1; i <= 4; i++) {
+        if(document.getElementById(`js-code-editor-${i}`)) {
+          runCode(i);
+        }
+      }
+    });
+  </script>
+
+  <script src="../script.js"></script>
+</body>
+</html>
