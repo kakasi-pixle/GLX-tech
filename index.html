@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة تعليم البرمجة</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="author" content="G.L.X shawarma">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://img.icons8.com https://via.placeholder.com https://images.unsplash.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self';">
+</head>
+
+<body class="protect-content" onkeydown="return true;" oncontextmenu="return false;" onselectstart="return false" ondragstart="return false">
+  <header>
+    <div class="container">
+      <div class="logo">منصة البرمجة <span class="developer-name">بواسطة G.L.X shawarma</span></div>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">الرئيسية</a></li>
+          <li><a href="#courses">الدورات</a></li>
+          <li><a href="#web-security">أمان الويب</a></li>
+          <li><a href="#about">عن المطور</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>ابدأ رحلة تعلم <span class="highlight">البرمجة</span> الآن!</h1>
+      <p>منصة عربية لتعلم البرمجة بأسلوب بسيط وعملي</p>
+      <a href="#courses" class="btn explore-btn">استكشف دوراتنا</a>
+      <a href="/langs/html_tutorial.html" class="btn" style="margin-right: 10px;">دورة HTML مباشرة</a>
+    </div>
+  </section>
+
+  <section id="courses" class="courses">
+    <div class="container">
+      <h2>الدورات المتاحة</h2>
+      <p class="section-description">اختر إحدى الدورات التالية وابدأ رحلة التعلم</p>
+      
+      <div class="courses-grid">
+        <div id="html-course" class="course-card">
+          <div class="card-header">
+            <img src="https://img.icons8.com/color/96/000000/html-5--v1.png" alt="HTML">
+            <h3>HTML</h3>
+            <p>لغة ترميز النص التشعبي</p>
+          </div>
+          <div class="card-body">
+            <p>تعلم كيفية إنشاء هيكل صفحات الويب باستخدام HTML</p>
+            <a href="/langs/html_tutorial.html" class="btn">ابدأ الدورة</a>
+          </div>
+        </div>
+        
+        <div id="css-course" class="course-card">
+          <div class="card-header">
+            <img src="https://img.icons8.com/color/96/000000/css3.png" alt="CSS">
+            <h3>CSS</h3>
+            <p>لغة التنسيق</p>
+          </div>
+          <div class="card-body">
+            <p>تعلم كيفية تنسيق وتصميم صفحات الويب باستخدام CSS</p>
+            <a href="/langs/css_tutorial.html" class="btn">ابدأ الدورة</a>
+          </div>
+        </div>
+        
+        <div id="js-course" class="course-card">
+          <div class="card-header">
+            <img src="https://img.icons8.com/color/96/000000/javascript--v1.png" alt="JavaScript">
+            <h3>JavaScript</h3>
+            <p>لغة البرمجة التفاعلية</p>
+          </div>
+          <div class="card-body">
+            <p>تعلم كيفية إضافة التفاعل والحركة إلى مواقع الويب</p>
+            <a href="/langs/javascript_tutorial.html" class="btn">ابدأ الدورة</a>
+          </div>
+        </div>
+        
+        <div id="skills-course" class="course-card">
+          <div class="card-header">
+            <img src="https://img.icons8.com/color/96/000000/design--v1.png" alt="Skills">
+            <h3>مهارات متقدمة</h3>
+            <p>تقنيات وتأثيرات متقدمة</p>
+          </div>
+          <div class="card-body">
+            <p>تعلم كيفية إضافة تأثيرات ثلاثية الأبعاد والتقنيات الحديثة للويب</p>
+            <a href="/langs/skills_tutorial.html" class="btn">ابدأ الدورة</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="web-security" class="web-security">
+    <div class="container">
+      <h2>أمان الويب</h2>
+      <p class="section-description">تعرف على أهم مفاهيم أمان الويب وكيفية حماية مواقعك</p>
+      
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-icon">
+            <img src="https://img.icons8.com/color/96/000000/password-check.png" alt="أمان كلمات المرور">
+          </div>
+          <h3>أمان كلمات المرور</h3>
+          <div class="security-content">
+            <p>كلمات المرور هي خط الدفاع الأول عن حسابات المستخدمين. يجب اتباع الممارسات التالية:</p>
+            <ul>
+              <li>استخدام كلمات مرور قوية (8 أحرف على الأقل، مزيج من الأحرف والأرقام والرموز)</li>
+              <li>عدم استخدام نفس كلمة المرور لعدة حسابات</li>
+              <li>تخزين كلمات المرور بشكل مشفر (باستخدام خوارزميات مثل bcrypt)</li>
+              <li>تنفيذ سياسات كلمة مرور قوية وتغييرها بشكل دوري</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-icon">
+            <img src="https://img.icons8.com/color/96/000000/shield-check.png" alt="حماية البيانات">
+          </div>
+          <h3>حماية البيانات الحساسة</h3>
+          <div class="security-content">
+            <p>يجب حماية البيانات الحساسة للمستخدمين من خلال:</p>
+            <ul>
+              <li>تشفير البيانات الحساسة أثناء النقل (باستخدام HTTPS)</li>
+              <li>تشفير البيانات الحساسة أثناء التخزين</li>
+              <li>تطبيق سياسات الوصول المناسبة</li>
+              <li>الاحتفاظ فقط بالحد الأدنى من البيانات الضرورية</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-icon">
+            <img src="https://img.icons8.com/color/96/000000/firewall.png" alt="حماية من الهجمات">
+          </div>
+          <h3>الحماية من حقن SQL</h3>
+          <div class="security-content">
+            <p>حقن SQL هي تقنية شائعة للهجوم على قواعد البيانات. للحماية منها:</p>
+            <ul>
+              <li>استخدام Prepared Statements أو Parameterized Queries</li>
+              <li>تنقية مدخلات المستخدم</li>
+              <li>تقييد صلاحيات قاعدة البيانات</li>
+              <li>تجنب استخدام الاستعلامات الديناميكية قدر الإمكان</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-icon">
+            <img src="https://img.icons8.com/color/96/000000/filter.png" alt="فلترة المدخلات">
+          </div>
+          <h3>الحماية من XSS</h3>
+          <div class="security-content">
+            <p>Cross-Site Scripting (XSS) هي ثغرة تسمح للمهاجمين بحقن نصوص برمجية ضارة. للحماية:</p>
+            <ul>
+              <li>تنقية وتشفير مدخلات المستخدم</li>
+              <li>استخدام Content Security Policy (CSP)</li>
+              <li>استخدام مكتبات أمان مثل DOMPurify</li>
+              <li>تحديث المكتبات والأطر المستخدمة باستمرار</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="info-note">
+        <p>ملاحظة: أمان الويب مجال متغير باستمرار، تأكد من متابعة أحدث الممارسات والتهديدات الأمنية.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <h2>عن المطور</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>أنا يحيى، المعروف باسم "شاورما المصري"، مطور مواقع وتطبيقات عمري 14 عامًا. أحب تبسيط المفاهيم المعقدة وأؤمن بأن تعلم البرمجة يجب أن يكون متاحًا للجميع.</p>
+          <p>هذه المنصة تم إنشاؤها لتقديم تعليم برمجة عالي الجودة باللغة العربية، مع التركيز على الجوانب العملية والفهم العميق.</p>
+          <blockquote>
+            "المعرفة قوة، ومشاركتها أقوى."
+          </blockquote>
+          <a href="about_developer.html" class="btn" style="margin-top: 20px;">تعرف على المزيد عني</a>
+        </div>
+        <div class="about-skills">
+          <h3>المهارات</h3>
+          <div class="skill-bars">
+            <div class="skill">
+              <span>HTML / CSS</span>
+              <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+            </div>
+            <div class="skill">
+              <span>JavaScript</span>
+              <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+            </div>
+            <div class="skill">
+              <span>Node.js</span>
+              <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+            </div>
+            <div class="skill">
+              <span>Python</span>
+              <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+            </div>
+            <div class="skill">
+              <span>PHP / Lua</span>
+              <div class="skill-bar"><div class="skill-level" style="width: 75%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>جميع الحقوق محفوظة &copy; 2025 - منصة تعليم البرمجة</p>
+      <p>تم التطوير بواسطة G.L.X shawarma</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
