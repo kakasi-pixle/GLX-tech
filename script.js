@@ -191,12 +191,11 @@ function hideJSContent() {
 }
 
 
-// حماية الموقع ضد inspect element (فحص العناصر)
+// حماية الموقع ضد inspect element (فحص العناصر) وسرقة الكود
 (function() {
   // تعطيل النقر بزر الفأرة الأيمن
   document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    alert("غير مسموح باستخدام زر الفأرة الأيمن على هذا الموقع!");
     return false;
   });
   
@@ -205,26 +204,23 @@ function hideJSContent() {
     // F12
     if (e.keyCode === 123) {
       e.preventDefault();
-      alert("غير مسموح باستخدام أدوات المطور!");
       return false;
     }
     
     // Ctrl+Shift+I أو Ctrl+Shift+J أو Ctrl+Shift+C
     if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
       e.preventDefault();
-      alert("غير مسموح باستخدام أدوات المطور!");
       return false;
     }
     
     // Ctrl+U (عرض المصدر)
     if (e.ctrlKey && e.keyCode === 85) {
       e.preventDefault();
-      alert("غير مسموح بعرض المصدر!");
       return false;
     }
   });
   
-  // إرسال إشعار عند محاولة فتح أدوات المطور
+  // حماية متقدمة ضد أدوات المطور
   function detectDevTools() {
     const widthThreshold = window.outerWidth - window.innerWidth > 160;
     const heightThreshold = window.outerHeight - window.innerHeight > 160;
@@ -255,23 +251,26 @@ function hideJSContent() {
     return false;
   });
   
-  // إضافة رسالة تحذير عند مغادرة الصفحة
-  window.addEventListener('beforeunload', function(e) {
-    e.preventDefault();
-    e.returnValue = '';
-    return '';
-  });
+  // حماية متقدمة للكونسول (Console)
+  // تعطيل وإعادة تعريف دوال الكونسول
+  (function() {
+    const originalConsole = window.console;
+    window.console = {};
+    const methods = ['log', 'warn', 'error', 'info', 'debug', 'clear', 'dir', 'dirxml', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'count', 'countReset', 'time', 'timeEnd', 'timeLog', 'assert', 'profile', 'profileEnd', 'table'];
+    
+    methods.forEach(method => {
+      window.console[method] = function() {
+        // إعادة تحميل الصفحة عند محاولة استخدام الكونسول
+        window.location.reload();
+      };
+    });
+  })();
   
-  // تعديل بيانات المتصفح Console
-  console.log = function() { 
-    console.error('محاولة استخدام وحدة التحكم غير مسموحة!');
-    window.location.reload(); 
-  };
-  console.warn = console.log;
-  console.error = console.log;
-  console.info = console.log;
-  console.debug = console.log;
-  console.clear = console.log;
+  // حماية إضافية للكود المصدري
+  // إضافة قيم مزيفة وتشتيت للكود
+  window._0x1a2b3c = function() { return false; };
+  window._securityToken = Math.random().toString(36).substring(2);
+  window.__protectionLayer = true;
   
   // حل مشكلة courseButtons
   const courseButtons = document.querySelectorAll('.course-card .btn');
@@ -279,8 +278,20 @@ function hideJSContent() {
     courseButtons.forEach(button => {
       button.addEventListener('click', function(e) {
         const parentCard = this.closest('.course-card');
-        console.log("الانتقال إلى الدورة:", this.getAttribute('href'));
       });
     });
   }
+  
+  // تعطيل API DevTools
+  Object.defineProperty(window, 'devtoolsDetector', {
+    value: function() { return false; },
+    writable: false,
+    configurable: false
+  });
+  
+  // حماية النص من النسخ
+  document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    return false;
+  });
 })();
